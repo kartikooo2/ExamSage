@@ -1,0 +1,44 @@
+Engineering Mathematics - Question Paper 2023
+================================================
+
+Exam Date: 15-06-2023
+
+Section A (2 marks each)
+
+1. Define the rank of a matrix and explain its significance. [2]
+
+2. State the Cayley-Hamilton theorem. (2 marks)
+
+3. What are eigenvalues and eigenvectors? (2)
+
+4. Find the derivative of x^3 + 2x^2 - 5 with respect to x. [2]
+
+5. Define continuity of a function at a point. (2 marks)
+
+Section B (5 marks each)
+
+6. Find the inverse of the matrix [[1, 2], [3, 4]] using the adjugate method. [5]
+
+7. Solve the system of equations:
+   2x + 3y + z = 9
+   x + y + z = 5
+   3x - y + 2z = 8
+   (5 marks)
+
+8. Using Gaussian elimination, find the rank of the matrix [[1, 2, 3], [4, 5, 6], [7, 8, 9]]. [5]
+
+9. Find the integral of cos(x) * e^x using integration by parts. (5 marks)
+
+10. Evaluate the definite integral from 0 to 1 of (2x + 3x^2) dx. [5]
+
+Section C (10 marks each)
+
+11. Find all eigenvalues and eigenvectors of the matrix [[4, 1], [2, 3]]. (10 marks)
+
+12. Solve the differential equation dy/dx + 2y = e^(-2x) using integrating factor method. [10]
+
+13. Verify Stokes' theorem for the vector field F = (y, z, x) over the unit sphere. (10 marks)
+
+14. Find the Taylor series expansion of sin(x) about x = 0 up to the 5th degree term. [10]
+
+15. A box contains 5 red balls and 3 black balls. If 2 balls are drawn without replacement, find the probability that both are red. (10 marks)

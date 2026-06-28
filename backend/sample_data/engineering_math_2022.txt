@@ -1,0 +1,40 @@
+Engineering Mathematics - Question Paper 2022
+================================================
+
+Date: 20-05-2022
+
+Part A (2 marks)
+
+1. What is the characteristic equation of a matrix? (2)
+
+2. Find the limit as x approaches 0 of sin(x)/x. [2]
+
+3. Define a differential equation. (2 marks)
+
+4. State Bayes' theorem. [2]
+
+5. What is curl of a vector field? (2)
+
+Part B (5 marks)
+
+6. Diagonalize the matrix [[2, 1], [1, 2]]. [5]
+
+7. Use L'Hopital's rule to find limit as x approaches 0 of (e^x - 1 - x)/x^2. (5 marks)
+
+8. Solve the first-order differential equation dy/dx = x + y with y(0) = 1. [5]
+
+9. Compute the line integral of F = (x, y) along the straight line from (0,0) to (1,1). (5 marks)
+
+10. If X is a normal distribution with mean 100 and standard deviation 15, find P(X > 115). [5]
+
+Part C (10 marks)
+
+11. Find the eigenvalues of the matrix [[1, 0, 1], [0, 1, 0], [1, 0, 1]]. (10 marks)
+
+12. Integrate x^2 * e^x from 0 to 1 using integration by parts. [10]
+
+13. Verify that u = e^x * sin(y) satisfies Laplace's equation. (10 marks)
+
+14. Solve the second-order differential equation d^2y/dx^2 - 3*dy/dx + 2y = 0. [10]
+
+15. Using divergence theorem, evaluate the surface integral of F = (x^2, y^2, z^2) over the unit cube. (10 marks)

@@ -1,0 +1,94 @@
+Engineering Mathematics - B.Tech Syllabus
+============================================
+
+Unit 1: Linear Algebra and Matrices
+-----------------------------------
+Chapter: Matrices and Determinants
+Topics:
+- Matrix operations and types
+- Rank of a matrix
+- Eigenvalues and eigenvectors
+- Cayley-Hamilton theorem
+- Diagonalization of matrices
+
+Chapter: Systems of Linear Equations
+Topics:
+- Solution of linear systems
+- Gaussian elimination method
+- Gauss-Jordan elimination
+- Consistency and rank method
+
+Unit 2: Calculus
+-----------------------------------
+Chapter: Differential Calculus
+Topics:
+- Limits and continuity
+- Derivatives and differentiation rules
+- Mean value theorem
+- Taylor's and Maclaurin's series
+- L'Hopital's rule
+
+Chapter: Integral Calculus
+Topics:
+- Indefinite integrals
+- Methods of integration
+- Definite integrals
+- Application to areas and volumes
+
+Unit 3: Differential Equations
+-----------------------------------
+Chapter: Ordinary Differential Equations
+Topics:
+- First-order differential equations
+- Separable equations
+- Exact equations
+- Linear differential equations
+- Second-order differential equations with constant coefficients
+
+Chapter: Partial Differential Equations
+Topics:
+- Formation of partial differential equations
+- Solution of first-order linear PDEs
+- Wave equation and heat equation
+
+Unit 4: Complex Analysis
+-----------------------------------
+Chapter: Complex Numbers and Functions
+Topics:
+- Complex numbers and operations
+- Modulus and argument
+- De Moivre's theorem
+- Functions of complex variables
+
+Chapter: Analytic Functions
+Topics:
+- Cauchy-Riemann equations
+- Harmonic functions
+- Singularities and poles
+- Residue theorem
+
+Unit 5: Vector Calculus
+-----------------------------------
+Chapter: Vector Analysis
+Topics:
+- Scalar and vector fields
+- Gradient, divergence, and curl
+- Line integrals
+- Surface integrals
+- Stokes' theorem and divergence theorem
+
+Unit 6: Probability and Statistics
+-----------------------------------
+Chapter: Probability
+Topics:
+- Sample space and events
+- Conditional probability
+- Bayes' theorem
+- Probability distributions
+
+Chapter: Statistics
+Topics:
+- Mean, median, and mode
+- Variance and standard deviation
+- Normal distribution
+- Hypothesis testing
