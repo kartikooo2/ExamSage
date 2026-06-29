@@ -1,6 +1,4 @@
-/**
- * Demo response data for testing UI without backend
- */
+
 
 export const demoResponse = {
   "success": true,

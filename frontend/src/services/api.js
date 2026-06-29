@@ -1,6 +1,4 @@
-/**
- * API service for communicating with ExamSage backend
- */
+
 
 import axios from 'axios'
 
@@ -11,15 +9,7 @@ const api = axios.create({
   timeout: 120000, // 2 minutes for large file processing
 })
 
-/**
- * Submit syllabus and PYQ files for analysis
- * 
- * @param {string} subjectName - Name of the subject
- * @param {File} syllabusFile - Syllabus file (PDF or TXT)
- * @param {File[]} pyqFiles - Array of question paper files
- * @param {Function} onProgress - Progress callback (optional)
- * @returns {Promise} Analysis results
- */
+
 export const submitAnalysis = async (
   subjectName,
   syllabusFile,
@@ -58,9 +48,7 @@ export const submitAnalysis = async (
   }
 }
 
-/**
- * Check backend health
- */
+
 export const checkHealth = async () => {
   try {
     const response = await api.get('/health')

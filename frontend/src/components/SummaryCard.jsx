@@ -1,6 +1,3 @@
-/**
- * Summary card component for displaying key metrics
- */
 
 export default function SummaryCard({ title, value, icon = '📊', subtitle = '' }) {
   return (

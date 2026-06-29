@@ -1,27 +1,20 @@
-"""
-ExamSage Backend - Flask Application
-Main entry point for the PYQ Weightage Analyzer backend.
-"""
+
 
 from flask import Flask, jsonify
 from flask_cors import CORS
 from routes.analyze_routes import analyze_bp
 import os
 
-# Initialize Flask app
 app = Flask(__name__)
 
-# Configuration
 app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024  # 50MB max file size
 app.config['UPLOAD_FOLDER'] = 'uploads'
 
 # Enable CORS for all routes
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 
-# Register blueprints
 app.register_blueprint(analyze_bp)
 
-# Ensure uploads folder exists
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 
@@ -52,7 +45,6 @@ def internal_error(error):
 
 
 if __name__ == '__main__':
-    # Run development server
     print("Starting ExamSage Backend...")
     print("Server running at http://localhost:5000")
     print("CORS enabled for frontend requests")

@@ -1,6 +1,3 @@
-/**
- * Chapter table component for displaying all chapters
- */
 
 import ChapterRow from './ChapterRow'
 

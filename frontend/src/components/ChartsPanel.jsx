@@ -1,6 +1,4 @@
-/**
- * Charts panel component using Recharts
- */
+
 
 import {
   BarChart,

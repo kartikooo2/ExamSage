@@ -15,7 +15,6 @@ export default function Analyzer({ onAnalysisComplete, onNavigateHome, backendHe
   const [loading, setLoading] = useState(false)
   const [uploadProgress, setUploadProgress] = useState(0)
   
-  // Validation
   const isFormValid = subjectName.trim() && syllabusFile && pyqFiles.length > 0
   
   const handleSyllabusSelect = (files) => {
@@ -37,7 +36,6 @@ export default function Analyzer({ onAnalysisComplete, onNavigateHome, backendHe
   const handleSubmit = async (e) => {
     e.preventDefault()
     
-    // Validate
     if (!subjectName.trim()) {
       setError('Please enter a subject name')
       return

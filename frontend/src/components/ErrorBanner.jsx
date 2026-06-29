@@ -1,6 +1,4 @@
-/**
- * Error banner component for displaying error messages
- */
+
 
 export default function ErrorBanner({ message, onClose }) {
   if (!message) return null

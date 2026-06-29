@@ -1,6 +1,4 @@
-/**
- * Results page - Display analysis results
- */
+
 
 import Navbar from '../components/Navbar'
 import SummaryCard from '../components/SummaryCard'

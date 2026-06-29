@@ -1,6 +1,4 @@
-/**
- * Loading spinner component
- */
+
 
 export default function LoadingSpinner({ message = 'Loading...' }) {
   return (

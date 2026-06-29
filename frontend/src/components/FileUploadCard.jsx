@@ -1,6 +1,4 @@
-/**
- * File upload card component for selecting files
- */
+
 
 import { useState } from 'react'
 

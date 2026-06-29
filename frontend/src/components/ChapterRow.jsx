@@ -1,6 +1,4 @@
-/**
- * Chapter row component for displaying and expanding chapter details
- */
+
 
 import { useState } from 'react'
 
