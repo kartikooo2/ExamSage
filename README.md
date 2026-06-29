@@ -86,7 +86,7 @@ ExamSage/
 ### Clone the repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/kartikooo2/ExamSage.git
 cd ExamSage
 ```
 
@@ -106,15 +106,13 @@ python app.py
 
 ### Frontend
 
-```bash
+
 cd frontend
 
 npm install
 
 npm run dev
-```
 
----
 
 ## Future Improvements
 
@@ -130,7 +128,6 @@ npm run dev
 
 Contributing to ExamSage
 
-Thank you for your interest in contributing to ExamSage! 🎉
 
 We appreciate every contribution, whether it's fixing bugs, improving documentation, adding features, or enhancing the user experience.
 
@@ -140,7 +137,7 @@ How to Contribute
 Click the Fork button on GitHub to create your own copy of this repository.
 
 2. Clone Your Fork
-git clone https://github.com/your-username/ExamSage.git
+git clone https://github.com/kartikooo2/ExamSage.git
 cd ExamSage
 3. Create a New Branch
 
@@ -148,9 +145,7 @@ Create a branch for your feature or bug fix.
 
 git checkout -b feature/your-feature-name
 
-Example:
 
-git checkout -b feature/improve-ui
 4. Install Dependencies
 npm install
 5. Run the Project
@@ -168,9 +163,7 @@ Test your changes before submitting.
 git add .
 git commit -m "Add: Short description of your changes"
 
-Example:
 
-git commit -m "Fix: Improve syllabus upload validation"
 8. Push Your Branch
 git push origin feature/your-feature-name
 9. Open a Pull Request
