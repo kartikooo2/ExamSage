@@ -128,3 +128,82 @@ npm run dev
 
 ---
 
+Contributing to ExamSage
+
+Thank you for your interest in contributing to ExamSage! 🎉
+
+We appreciate every contribution, whether it's fixing bugs, improving documentation, adding features, or enhancing the user experience.
+
+How to Contribute
+1. Fork the Repository
+
+Click the Fork button on GitHub to create your own copy of this repository.
+
+2. Clone Your Fork
+git clone https://github.com/your-username/ExamSage.git
+cd ExamSage
+3. Create a New Branch
+
+Create a branch for your feature or bug fix.
+
+git checkout -b feature/your-feature-name
+
+Example:
+
+git checkout -b feature/improve-ui
+4. Install Dependencies
+npm install
+5. Run the Project
+npm start
+
+or if using Vite:
+
+npm run dev
+6. Make Your Changes
+Follow the existing project structure.
+Write clean and readable code.
+Keep commits focused on a single feature or fix.
+Test your changes before submitting.
+7. Commit Your Changes
+git add .
+git commit -m "Add: Short description of your changes"
+
+Example:
+
+git commit -m "Fix: Improve syllabus upload validation"
+8. Push Your Branch
+git push origin feature/your-feature-name
+9. Open a Pull Request
+
+Go to your fork on GitHub and click New Pull Request.
+
+Please include:
+
+A clear title.
+A brief description of your changes.
+Screenshots (if UI changes are involved).
+Contribution Guidelines
+Keep code clean and modular.
+Follow consistent naming conventions.
+Avoid unnecessary dependencies.
+Update documentation if your changes affect usage.
+Ensure your code does not introduce build errors.
+Reporting Bugs
+
+If you find a bug, please open an issue and include:
+
+Bug description
+Steps to reproduce
+Expected behavior
+Screenshots (if applicable)
+Environment (OS, Browser, Node version)
+Feature Requests
+
+Have an idea to improve ExamSage?
+
+Open an issue describing:
+
+The problem you're trying to solve.
+Your proposed solution.
+Any alternatives you've considered.
+
