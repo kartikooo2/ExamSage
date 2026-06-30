@@ -99,7 +99,7 @@ export default function Analyzer({ onAnalysisComplete, onNavigateHome, backendHe
   }
   
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-r from-gray-950 to-gray-800">
       <Navbar />
       
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -110,8 +110,8 @@ export default function Analyzer({ onAnalysisComplete, onNavigateHome, backendHe
           >
             ← Back to Home
           </button>
-          <h1 className="text-4xl font-bold text-gray-900">Analyze Your PYQs</h1>
-          <p className="text-gray-600 mt-2">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Analyze Your PYQs</h1>
+          <p className="text-white mt-2">
             Upload your syllabus and question papers to get chapter-wise insights
           </p>
         </div>
@@ -120,25 +120,25 @@ export default function Analyzer({ onAnalysisComplete, onNavigateHome, backendHe
         
         <form onSubmit={handleSubmit} className="space-y-8">
           {/* Subject Name */}
-          <div className="bg-white rounded-lg p-6 shadow-md">
-            <label className="block text-sm font-medium text-gray-700 mb-3">
+          <div className="bg-gradient-to-r from-blue-500 to-blue-200 rounded-lg p-6 shadow-md">
+            <label className="block text-sm font-medium text-black mb-3">
               Subject Name *
             </label>
             <input
               type="text"
               value={subjectName}
               onChange={(e) => setSubjectName(e.target.value)}
-              placeholder="e.g., Engineering Mathematics, Data Structures"
-              className="input-field"
+              placeholder= "e.g., Engineering Mathematics, Data Structures"
+              className="input-field text-black"
               required
             />
-            <p className="text-sm text-gray-500 mt-2">
+            <p className="text-sm text-black mt-2">
               Enter the name of the subject you want to analyze
             </p>
           </div>
           
           {/* Syllabus Upload */}
-          <div className="bg-white rounded-lg p-6 shadow-md">
+          <div className="bg-gradient-to-r from-blue-500 to-blue-200 rounded-lg p-6 shadow-md">
             <FileUploadCard
               label="Upload Syllabus File *"
               accept=".pdf,.txt"
@@ -146,13 +146,13 @@ export default function Analyzer({ onAnalysisComplete, onNavigateHome, backendHe
               onFileSelect={handleSyllabusSelect}
               selectedFiles={syllabusFile ? [syllabusFile] : null}
             />
-            <p className="text-sm text-gray-500 mt-3">
+            <p className="text-sm text-black mt-3">
               Upload a single syllabus file in PDF or TXT format
             </p>
           </div>
           
           {/* PYQ Files Upload */}
-          <div className="bg-white rounded-lg p-6 shadow-md">
+          <div className="bg-gradient-to-r from-blue-500 to-blue-200 rounded-lg p-6 shadow-md">
             <FileUploadCard
               label="Upload Question Papers *"
               accept=".pdf,.txt"
@@ -160,7 +160,7 @@ export default function Analyzer({ onAnalysisComplete, onNavigateHome, backendHe
               onFileSelect={handlePyqSelect}
               selectedFiles={pyqFiles.length > 0 ? pyqFiles : null}
             />
-            <p className="text-sm text-gray-500 mt-3">
+            <p className="text-sm text-black mt-3">
               Upload multiple question paper files from different years in PDF or TXT format
             </p>
             
@@ -193,7 +193,7 @@ export default function Analyzer({ onAnalysisComplete, onNavigateHome, backendHe
             <button
               type="submit"
               disabled={!isFormValid}
-              className="btn-primary flex-1 text-lg py-3"
+              className="btn-primary flex-1 text-lg py-3 bg-gradient-to-r from-blue-600 to-blue-400"
             >
               {loading ? 'Analyzing...' : 'Analyze 🔍'}
             </button>
@@ -212,8 +212,8 @@ export default function Analyzer({ onAnalysisComplete, onNavigateHome, backendHe
           </div>
           
           {backendHealthy === false && (
-            <div className="bg-blue-50 border border-blue-200 rounded p-4 text-center">
-              <p className="text-blue-900 font-medium mb-3">
+            <div className="bg-gradient-to-b from-blue-600 to-blue-400 border border-black rounded p-4 text-center">
+              <p className="text-black font-medium mb-3">
                 Backend connection issues? Try our demo analysis instead
               </p>
               <button
@@ -228,9 +228,9 @@ export default function Analyzer({ onAnalysisComplete, onNavigateHome, backendHe
         </form>
         
         {/* Info Section */}
-        <div className="mt-12 bg-blue-50 rounded-lg p-6 border border-blue-200">
-          <h3 className="font-bold text-gray-900 mb-3">💡 Tips for Best Results:</h3>
-          <ul className="space-y-2 text-gray-700 text-sm">
+        <div className="mt-12 bg-gray-700 rounded-lg p-6 border border-gray-700">
+          <h3 className="font-bold text-green-600 mb-3">💡 Tips for Best Results:</h3>
+          <ul className="space-y-2 text-white text-sm">
             <li>• Use clear, legible PDF or text files</li>
             <li>• Include the year in question paper filenames (e.g., "Math_2023.pdf")</li>
             <li>• Ensure questions are properly numbered or separated</li>
