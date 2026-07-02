@@ -95,83 +95,130 @@ def extract_marks(question_text):
     return None
 
 
+
 def split_questions(text):
- 
-    if not text or len(text.strip()) == 0:
+
+    if not text:
         return []
-    
+
+    text = text.replace("\r", "\n")
+    text = re.sub(r'(?<![A-Za-z])0[\.:]?\s*(\d)', r'Q.\1', text)
+
+    # Normalize section headings
+    text = re.sub(r'PARL[_ ]?A|PART[_ ]?A', '\nPART A\n', text, flags=re.I)
+    text = re.sub(r'PARL[_ ]?B|PART[_ ]?B', '\nPART B\n', text, flags=re.I)
+    text = re.sub(r'PARL[_ ]?C|PART[_ ]?C', '\nPART C\n', text, flags=re.I)
+
+    # Remove page numbers
+    text = re.sub(r'Page\s+\d+\s+of\s+\d+', '', text, flags=re.I)
+
+    # Start every question on a new line
+    text = re.sub(r'(Q\.?\s*\d+)', r'\n\1', text)
+
+    # OCR sometimes writes 01,02,03...
+
+    lines = text.split("\n")
+
     questions = []
-    lines = text.split('\n')
-    
-    current_question = ""
-    
-    question_start_pattern = r'^[\s]*(?:[Qq](?:uestion|uest)?\.?\s*)?(?:\(?)(?:[a-z]|[IVX]+|\d+)(?:\)?[\.\):]|\))\s+'
-    
+
+    current = ""
+
     for line in lines:
-        line_rstrip = line.rstrip()
-        
-        if re.match(question_start_pattern, line_rstrip):
-            # Save previous question if exists and is non-empty
-            if current_question.strip() and len(current_question.strip()) > 10:
-                questions.append(current_question.strip())
-            
-            current_question = line_rstrip
+
+        line = " ".join(line.split())
+
+        if not line:
+            continue
+
+        # Ignore obvious garbage
+        if any(x in line.lower() for x in [
+            "roll no",
+            "maximum marks",
+            "instructions",
+            "time:",
+            "total no"
+        ]):
+            continue
+
+        # Section heading
+        if re.match(r'^PART\s+[ABC]$', line, re.I):
+
+            if current:
+                questions.append(current.strip())
+                current = ""
+
+            questions.append(line.upper())
+            continue
+
+        # New question
+        if re.search(r'Q\.?\s*\d+', line, re.I):
+
+            if current:
+                questions.append(current.strip())
+
+            current = line
+
         else:
-            if current_question:
-                current_question += " " + line_rstrip.strip()
-            elif line_rstrip.strip():
-                current_question = line_rstrip
-    
-    if current_question.strip() and len(current_question.strip()) > 10:
-        questions.append(current_question.strip())
-    
+            if current:
+                current += " " + line
+
+    if current:
+        questions.append(current.strip())
+
     return questions
 
 
+
 def parse_questions(text, filename=None):
-   
+
     if not text or len(text.strip()) == 0:
         return []
-    
+
     year = None
     if filename:
         year = extract_year_from_filename(filename)
     if not year:
         year = extract_year_from_text(text)
+
+    questions = split_questions(text)
+    print("Questions Found:", len(questions))
+    print("------------ QUESTIONS ------------")
+    for i, q in enumerate(questions):
+        print(i + 1, q[:120])
     
-    question_texts = split_questions(text)
-    
+
+
     parsed_questions = []
-    current_section = "General"
-    
-    for q_text in question_texts:
-        section_match = detect_section(q_text)
-        if section_match:
-            current_section = section_match
-            if len(q_text) < 50:
-                continue
-        
-        marks = extract_marks(q_text)
-        
-        clean_question = q_text
-        
-        clean_question = re.sub(r'\s*\[?\d+\s*marks?\.?\]?\s*$', '', clean_question, flags=re.IGNORECASE)
-        
-        clean_question = re.sub(r'\s*\(\d+(?:\.\d+)?\s*marks?\)\s*$', '', clean_question, flags=re.IGNORECASE)
-        
-        clean_question = re.sub(r'\s*\(\d+(?:\.\d+)?\)\s*$', '', clean_question)
-        clean_question = re.sub(r'\s*\[\d+(?:\.\d+)?\]\s*$', '', clean_question)
-        
-        clean_question = re.sub(r'\s*\d+\s*M\s*$', '', clean_question, flags=re.IGNORECASE)
-        
-        clean_question = clean_question.strip()
-        
-        if clean_question and len(clean_question) > 10:
-            parsed_questions.append({
-                "question": clean_question,
-                "year": year,
-                "section": current_section,
-                "marks": marks
-            })
-    
+    current_marks = 2
+    current_section = "Part A"
+
+    for q in questions:
+
+        q_lower = q.lower()
+        if q.strip().upper() == "PART A":
+            current_marks = 2
+            current_section = "Part A"
+            continue
+
+        elif q.strip().upper() == "PART B":
+            current_marks = 4
+            current_section = "Part B"
+            continue
+
+        elif q.strip().upper() == "PART C":
+            current_marks = 10
+            current_section = "Part C"
+            continue
+
+        print("--------------------------------")
+        print("SECTION:", current_section)
+        print(q[:100])
+
+        parsed_questions.append({
+        "question": q,
+        "year": year,
+        "section": current_section,
+        "marks": current_marks
+        })
+
     return parsed_questions

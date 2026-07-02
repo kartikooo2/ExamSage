@@ -5,6 +5,7 @@ import os
 from pdf2image import convert_from_path
 import easyocr
 import numpy as np
+reader = easyocr.Reader(['en'])
 
 
 def extract_text_from_pdf(file_path):
@@ -17,30 +18,29 @@ def extract_text_from_pdf(file_path):
                 if page_text:
                     text += f"\n--- Page {page_num + 1} ---\n"
                     text += page_text
-        if len(text.strip()) < 50:
+        if len(text.strip()) < 300:
             print("Scanned PDF detected. Running OCR...")
             text = extract_text_from_scanned_pdf(file_path)  
-        print("========== Extracted Text ==========")
-        print(text[:2000])   # Prints first 2000 characters
-        print("===================================")    
+       # print("========== Extracted Text ==========")
+        #print(text[:2000])   # Prints first 2000 characters
+        #print("===================================")    
 
         return text
     except Exception as e:
         print(f"Error extracting PDF {file_path}: {str(e)}")
         return ""
 def extract_text_from_scanned_pdf(file_path):
-   
     try:
-        reader = easyocr.Reader(['en'])
-
         text = ""
+
         images = convert_from_path(
-    file_path,
-    poppler_path=r"D:\DSA\ExamSage\poppler-26.02.0\Library\bin"
-)
+            file_path,
+             dpi=75,
+            poppler_path=r"D:\DSA\ExamSage\poppler-26.02.0\Library\bin"
+        )
 
         for image in images:
-            image=np.array(image)
+            image = np.array(image)
             result = reader.readtext(image, detail=0)
             text += " ".join(result) + "\n"
 
@@ -48,7 +48,7 @@ def extract_text_from_scanned_pdf(file_path):
 
     except Exception as e:
         print(f"OCR Error: {str(e)}")
-        return ""    
+        return ""
 
 
 def extract_text_from_txt(file_path):
@@ -70,7 +70,9 @@ def extract_text_from_txt(file_path):
 
 
 def extract_text(file_path):
-   
+
+    print("File path:", file_path)
+    print("Extension:", os.path.splitext(file_path)[1].lower())
     if not os.path.exists(file_path):
         print(f"File not found: {file_path}")
         return ""

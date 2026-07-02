@@ -1,8 +1,5 @@
-"""
-Analyze route handler for the /api/analyze endpoint.
-Orchestrates the full analysis pipeline.
-"""
 
+import time
 import os
 import uuid
 from flask import Blueprint, request, jsonify
@@ -33,27 +30,17 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 
 def allowed_file(filename):
-    """Check if file extension is allowed."""
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 def save_uploaded_file(file):
-    """
-    Save an uploaded file with a unique name.
-    
-    Args:
-        file: Flask file object
-        
-    Returns:
-        str: Path to saved file or None if failed
-    """
+  
     if not file or file.filename == '':
         return None
     
     if not allowed_file(file.filename):
         return None
     
-    # Generate unique filename
     file_ext = file.filename.rsplit('.', 1)[1].lower()
     unique_name = f"{uuid.uuid4().hex}.{file_ext}"
     filepath = os.path.join(UPLOAD_FOLDER, unique_name)
@@ -67,12 +54,7 @@ def save_uploaded_file(file):
 
 
 def cleanup_files(file_paths):
-    """
-    Clean up temporary uploaded files.
     
-    Args:
-        file_paths (list): List of file paths to delete
-    """
     for filepath in file_paths:
         try:
             if filepath and os.path.exists(filepath):
@@ -83,17 +65,7 @@ def cleanup_files(file_paths):
 
 @analyze_bp.route('/analyze', methods=['POST'])
 def analyze():
-    """
-    Main analysis endpoint.
-    
-    Accepts:
-    - subjectName (string): Name of the subject
-    - syllabusFile (file): Syllabus file (PDF or TXT)
-    - pyqFiles (files): List of PYQ files (PDF or TXT)
-    
-    Returns:
-    - JSON with analytics results
-    """
+    total_start = time.time()
     
     try:
         # Validate request
@@ -135,15 +107,30 @@ def analyze():
                 return jsonify({"error": "Failed to save syllabus file"}), 400
             
             uploaded_paths.append(syllabus_path)
-            
             syllabus_text = extract_text(syllabus_path)
-            if not syllabus_text:
-                return jsonify({"error": "Could not extract text from syllabus file"}), 400
+
             
-            # Parse syllabus
+
+            if not syllabus_text.strip():
+                print("❌ syllabus_text is EMPTY")
+                return jsonify({"error": "Could not extract text from syllabus file"}), 400
+
+            print("✅ Syllabus text extracted successfully")
+           
+            
             syllabus_data = parse_syllabus(syllabus_text)
+
+            print("Syllabus Data:")
+
+            if syllabus_data:
+                print("Total Chapters:", len(syllabus_data))
+            else:
+                print("Syllabus parser returned EMPTY")
+
             if not syllabus_data:
                 return jsonify({"error": "Could not parse syllabus structure"}), 400
+            
+            
             
             # Process PYQ files
             all_matched_questions = []
@@ -157,24 +144,35 @@ def analyze():
                 uploaded_paths.append(pyq_path)
                 
                 # Extract text
+                start=time.time()
                 pyq_text = extract_text(pyq_path)
+                print(f"⏱️ OCR + Text Extraction for {pyq_file.filename}: {time.time() - start:.2f} seconds")
                 if not pyq_text:
                     continue
                 
                 # Parse questions
+                start = time.time()
                 questions = parse_questions(pyq_text, pyq_file.filename)
+                print("Questions Parsed:", len(questions))
+                print(f"⏱️ Question Parsing: {time.time() - start:.2f} seconds")
                 if not questions:
                     continue
                 
                 # Match questions to chapters
+                start=time.time()
                 matched_questions = match_all_questions(questions, syllabus_data)
+                print("Questions Matched:", len(matched_questions))
+                print(f"⏱️ Question Matching took {time.time() - start:.2f} seconds")
                 all_matched_questions.extend(matched_questions)
             
             if not all_matched_questions:
                 return jsonify({"error": "No questions could be extracted from PYQ files"}), 400
             
             # Generate analytics
+            start=time.time()
             analytics = generate_analytics(subject_name, syllabus_data, all_matched_questions)
+            print("Total Questions:", len(all_matched_questions))
+            print(f"⏱️ Analytics: {time.time() - start:.2f} seconds")
             
             # Extract additional data for frontend
             section_distribution = extract_section_distribution(analytics.get("chapters", []))
@@ -188,7 +186,7 @@ def analyze():
                 "totalQuestionsProcessed": len(all_matched_questions),
                 "totalChaptersInSyllabus": len(syllabus_data)
             }
-            
+            print(f"Total execution time: {time.time() - total_start:.2f} seconds")
             return jsonify(response), 200
         
         finally:
